@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>简述SpringBean的生命周期 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简述SpringBean的生命周期实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction  通过加载xml配置文件或注解配置的类，得到BeanDefinition； 通过BeanDefinition反射创建Bean对象； 将创建的Be">
+  <meta name="description" content="实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction  通过加载xml配置文件或注解配置的类，得到BeanDefinition； 通过BeanDefinition反射创建Bean对象；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简述SpringBean的生命周期">
 <meta property="og:url" content="http://example.com/2022/08/19/spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="简述SpringBean的生命周期实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction  通过加载xml配置文件或注解配置的类，得到BeanDefinition； 通过BeanDefinition反射创建Bean对象； 将创建的Be">
+<meta property="og:description" content="实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction  通过加载xml配置文件或注解配置的类，得到BeanDefinition； 通过BeanDefinition反射创建Bean对象；">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-19T14:41:00.432Z">
-<meta property="article:modified_time" content="2022-08-19T14:44:11.974Z">
+<meta property="article:modified_time" content="2022-08-19T15:00:18.002Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -174,10 +174,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="简述SpringBean的生命周期"><a href="#简述SpringBean的生命周期" class="headerlink" title="简述SpringBean的生命周期"></a>简述SpringBean的生命周期</h3><p><strong>实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction</strong></p>
+        <p><strong>实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction</strong></p>
 <ol>
 <li>通过加载xml配置文件或注解配置的类，得到BeanDefinition；</li>
-<li>通过BeanDefinition反射创建Bean对象；</li>
+<li>通过BeanDefinition反射创建Bean对象；<span id="more"></span></li>
 <li>将创建的Bean对象放入一个Map中；</li>
 <li>对Bean对象进行属性填充【这里有循环依赖的问题】；</li>
 <li>回调实现了Aware接口的方法，如BeanNameAware；</li>
@@ -305,7 +305,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%BF%B0SpringBean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">简述SpringBean的生命周期</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>

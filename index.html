@@ -172,21 +172,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="简述SpringBean的生命周期"><a href="#简述SpringBean的生命周期" class="headerlink" title="简述SpringBean的生命周期"></a>简述SpringBean的生命周期</h3><p><strong>实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction</strong></p>
+        <p><strong>实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction</strong></p>
 <ol>
 <li>通过加载xml配置文件或注解配置的类，得到BeanDefinition；</li>
-<li>通过BeanDefinition反射创建Bean对象；</li>
-<li>将创建的Bean对象放入一个Map中；</li>
-<li>对Bean对象进行属性填充【这里有循环依赖的问题】；</li>
-<li>回调实现了Aware接口的方法，如BeanNameAware；</li>
-<li>调用BeanPostProcessor的前置处理方法；</li>
-<li>调用init初始化方法，判断是否实现了initializingBean接口，如果有则调用afterPropertiesSet方法，没有就不调用；</li>
-<li>调用BeanPostProcessor的后置处理方法【在这步实现AOP】；</li>
-<li>业务调用Bean对象；</li>
-<li>Spring容器关闭时调用DisposableBean接口的destoryMethod()方法。</li>
-</ol>
-<p><strong>Spring Bean的生命周期其实就是指的是从一个普通的Java类根据BeanDefinition变成Bean的过程</strong></p>
-
+<li>通过BeanDefinition反射创建Bean对象；
+        
       
 
       
