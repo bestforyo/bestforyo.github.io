@@ -152,19 +152,115 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-spring三级缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Spring三级缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/19/spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/">简述SpringBean的生命周期</a>
+      <a class="article-title" href="/2022/08/25/Spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/">Spring三级缓存</a>
     </h1>
   
 
         
-        <a href="/2022/08/19/spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/" class="archive-article-date">
+        <a href="/2022/08/25/Spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/" class="archive-article-date">
+  	<time datetime="2022-08-25T03:32:19.703Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="先来看看什么是循环依赖？"><a href="#先来看看什么是循环依赖？" class="headerlink" title="先来看看什么是循环依赖？"></a>先来看看什么是循环依赖？</h4><p>从字面上来理解循环依赖其实就是循环引用，也就是两个或则两个以上的bean互相持有对方，最终形成闭环。比如A依赖B的同时B也依赖了A</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Demo1</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="comment">// A中注入了B</span></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> B b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="comment">// B中也注入了A</span></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> A a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="那么解决Spring循环依赖可以用三级缓存和提前暴露对象的方式。"><a href="#那么解决Spring循环依赖可以用三级缓存和提前暴露对象的方式。" class="headerlink" title="那么解决Spring循环依赖可以用三级缓存和提前暴露对象的方式。"></a>那么解决Spring循环依赖可以用<strong>三级缓存</strong>和<strong>提前暴露对象</strong>的方式。</h4><p> <strong>Spring的单例对象的初始化主要分为三步：</strong></p>
+<ol>
+<li><strong>实例化</strong>，对应方法：AbstractAutowireCapableBeanFactory中的<strong>createBeanInstance</strong>方法，其实也就是调用对象的构造方法实例化对象；</li>
+<li><strong>填充属性</strong>，对应方法：AbstractAutowireCapableBeanFactory的<strong>populateBean</strong>方法，这一步主要是多bean的依赖属性进行填充；</li>
+<li><strong>初始化</strong>，对应方法：AbstractAutowireCapableBeanFactory的<strong>initializeBean</strong>方法，调用spring xml中的init 方法；</li>
+</ol>
+<p>循环依赖主要发生在第一、二步，也就是构造器循环依赖和field循环依赖。</p>
+<p><strong>Spring解决循环依赖也是有前置条件的</strong></p>
+<ol>
+<li>出现循环依赖的Bean必须要是<strong>单例</strong></li>
+<li>依赖注入的方式<strong>不能全是构造器注入的方式【如下列代码所示】</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Demo2</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="comment">//	@Autowired</span></span><br><span class="line"><span class="comment">//	private B b;</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">A</span><span class="params">(B b)</span> &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	@Autowired</span></span><br><span class="line"><span class="comment">//	private A a;</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">B</span><span class="params">(A a)</span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在上面的例子中，A中注入B的方式是通过构造器，B中注入A的方式也是通过构造器，这个时候循环依赖是无法被解决，在启动时就会报出以下错误：Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name <span class="string">&#x27;a&#x27;</span>: Requested bean is currently in creation: Is there an unresolvable circular reference?</span><br></pre></td></tr></table></figure>
+
+<p>Spring内部维护了三个Map，也就是我们通常说的三级缓存。</p>
+<p><strong>三级缓存分别指：</strong>  </p>
+<ul>
+<li><p>一级缓存singletonObjects：单例对象的cache，<strong>缓存的是已经经历了完整生命周期的bean对象</strong></p>
+</li>
+<li><p>二级缓存earlySingletonObjects ：提前暴光的单例对象的Cache，在这个Map里的Bean不是完整的，甚至还不能称之为“Bean”，只是一个Instance.</p>
+</li>
+<li><p>三级缓存singletonFactories ： 单例对象工厂的cache，创建Bean的原始工厂，用来创建某个对象的。【还没有进行初始化的第二步和第三步，但是已经能被人认出来了即可以根据对象引用能定位到堆中的对象，所以Spring此时将这个对象提前曝露出来让大家认识，让大家使用。】</p>
+<p><img src="D:\桌面\三级缓存.png" alt="三级缓存"></p>
+</li>
+</ul>
+<p>当 Spring 为某个 Bean 填充属性的时候，它首先会寻找需要注入对象的名称，然后依次执行 getSingleton() 方法得到所需注入的对象，而获取对象的过程就是先从一级缓存中获取，一级缓存中没有就从二级缓存中获取，二级缓存中没有就从三级缓存中获取，如果三级缓存中也没有，那么就会去执行 doCreateBean() 方法创建这个 Bean。</p>
+<h4 id="那么Spring-是如何通过上面介绍的三级缓存来解决循环依赖的呢？"><a href="#那么Spring-是如何通过上面介绍的三级缓存来解决循环依赖的呢？" class="headerlink" title="那么Spring 是如何通过上面介绍的三级缓存来解决循环依赖的呢？"></a>那么Spring 是如何通过上面介绍的三级缓存来解决循环依赖的呢？</h4><p>这里只用 A，B 形成的循环依赖来举例：</p>
+<p>1.实例化 A，此时 A 还未完成属性填充和初始化方法的执行，A 只是一个半成品。<br>2.为 A 创建一个 Bean工厂，并放入到 三级缓存singletonFactories 中。<br>3.发现 A 需要注入 B 对象，但是一级、二级、三级缓存均未发现对象 B。<br>4.实例化 B，此时 B 还未完成属性填充和初始化方法的执行，B 只是一个半成品。<br>5.为 B 创建一个 Bean工厂，并放入到 singletonFactories 中。<br>6.发现 B 需要注入 A 对象，此时在一级、二级未发现对象A，但是在三级缓存中发现了对象 A，从三级缓存中得到对象 A，并将对象 A 放入二级缓存中，同时删除三级缓存中的对象 A。（注意，此时的 A还是一个半成品，并没有完成属性填充和执行初始化方法）<br>7.将对象 A 注入到对象 B 中。<br>8.对象 B 完成属性填充，执行初始化方法，并放入到一级缓存中，同时删除二级缓存中的对象 B。（此时对象 B 已经是一个成品）<br>9.对象 A 得到对象B，将对象 B 注入到对象 A 中。（对象 A 得到的是一个完整的对象 B）<br>10.对象 A完成属性填充，执行初始化方法，并放入到一级缓存中，同时删除二级缓存中的对象 A。</p>
+<h4 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h4><p>不要使用基于构造函数的依赖注入，可以通过以下方式解决： </p>
+<p>  1.在字段上使用@Autowired注解，让Spring决定在合适的时机注入 </p>
+<p>  2.用基于setter方法的依赖注入。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/25/Spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Spring Bean的生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">简述SpringBean的生命周期</a>
+    </h1>
+  
+
+        
+        <a href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="archive-article-date">
   	<time datetime="2022-08-19T14:41:00.432Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-19</time>
 </a>
         
@@ -188,7 +284,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/19/spring%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">展开全文 >></a>
         </p>
       
 
