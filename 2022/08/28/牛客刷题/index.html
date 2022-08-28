@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>牛客刷题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="1.题目描述：进制转换写出一个程序，输入一个十六进制的数值字符串，输出该数值的十进制表示。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客刷题">
+<meta property="og:url" content="http://example.com/2022/08/28/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.题目描述：进制转换写出一个程序，输入一个十六进制的数值字符串，输出该数值的十进制表示。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-28T13:14:42.658Z">
+<meta property="article:modified_time" content="2022-08-28T14:59:47.350Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,16 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-牛客刷题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-牛客刷题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98/">牛客刷题</a>
+    <h1 class="article-title" itemprop="name">
+      牛客刷题
     </h1>
   
 
@@ -173,9 +175,73 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="1-题目描述：进制转换"><a href="#1-题目描述：进制转换" class="headerlink" title="1.题目描述：进制转换"></a>1.题目描述：进制转换</h4><p>写出一个程序，输入一个十六进制的数值字符串，输出该数值的十进制表示。</p>
-        
+<span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span>(sc.hasNextLine())&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">            System.out.println(Integer.parseInt(s.substring(<span class="number">2</span>,s.length()),<span class="number">16</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="2-题目描述：输入一个正整数求所有质因子"><a href="#2-题目描述：输入一个正整数求所有质因子" class="headerlink" title="2.题目描述：输入一个正整数求所有质因子"></a>2.题目描述：输入一个正整数求所有质因子</h4><p>功能:输入一个正整数，按照从小到大的顺序输出它的所有质因子（重复的也要列举）（如180的质因子为2 2 3 3 5 ）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="variable">num</span> <span class="operator">=</span> scanner.nextLong();</span><br><span class="line">    <span class="type">long</span> <span class="variable">k</span> <span class="operator">=</span> (<span class="type">long</span>) Math.sqrt(num);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">long</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= k; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.print(i + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            num /= i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(num == <span class="number">1</span> ? <span class="string">&quot;&quot;</span>: num+<span class="string">&quot; &quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-题目描述：字符串分隔"><a href="#3-题目描述：字符串分隔" class="headerlink" title="3.题目描述：字符串分隔"></a>3.题目描述：字符串分隔</h4><p>•输入一个字符串，请按长度为8拆分每个输入字符串并进行输出；</p>
+<p>•长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">input</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="keyword">while</span>(input.hasNextLine())&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> input.nextLine();</span><br><span class="line">            split(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">split</span><span class="params">(String s)</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(s.length()&gt;=<span class="number">8</span>)&#123;</span><br><span class="line">            System.out.println(s.substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">            s=s.substring(<span class="number">8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s.length()&lt;<span class="number">8</span> &amp;&amp; s.length()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            s+=<span class="string">&quot;00000000&quot;</span>;</span><br><span class="line">            System.out.println(s.substring(<span class="number">0</span>,<span class="number">8</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-题目描述：字符的出现次数"><a href="#4-题目描述：字符的出现次数" class="headerlink" title="4.题目描述：字符的出现次数"></a>4.题目描述：字符的出现次数</h4><p>写出一个程序，接受一个由字母、数字和空格组成的字符串，和一个字符，然后输出输入字符串中该字符的出现次数。（不区分大小写字母）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        String input1= s.nextLine();</span><br><span class="line">        <span class="type">String</span> <span class="variable">input2</span> <span class="operator">=</span> s.nextLine();</span><br><span class="line">        <span class="comment">// 这里是空，不是空格，相当于把字符串中匹配上的字符都删掉，</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">split3</span> <span class="operator">=</span> input1.toUpperCase().replaceAll(input2.toUpperCase(),<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="comment">//用原来的长度减新的就是匹配的个数</span></span><br><span class="line">        System.out.println(input1.length() - split3.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-题目描述：字符串最后一个单词的长度"><a href="#5-题目描述：字符串最后一个单词的长度" class="headerlink" title="5.题目描述：字符串最后一个单词的长度"></a>5.题目描述：字符串最后一个单词的长度</h4><p>计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。（注：字符串末尾不以空格为结尾）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//标准输入</span></span><br><span class="line">        Scanner sc=<span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="comment">//键盘输入字符串</span></span><br><span class="line">        String s=sc.nextLine();</span><br><span class="line">        <span class="comment">//以空格分割为字符串数组</span></span><br><span class="line">        String[] arr=s.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        <span class="comment">//字符串数组最后一个元素即是原字符串的最后一个单词，直接输出其长度</span></span><br><span class="line">        System.out.println(arr[arr.length-<span class="number">1</span>].length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-题目描述：索引相同的记录进行合并"><a href="#6-题目描述：索引相同的记录进行合并" class="headerlink" title="6.题目描述：索引相同的记录进行合并"></a>6.题目描述：索引相同的记录进行合并</h4><p>数据表记录包含表索引index和数值value（int范围的正整数），请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照index值升序进行输出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String agv[])</span> &#123;</span><br><span class="line">      <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">      <span class="type">int</span> <span class="variable">tableSize</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">      Map&lt;Integer, Integer&gt; table = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(tableSize);</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; tableSize; i++) &#123;</span><br><span class="line">          <span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">          <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line">          <span class="keyword">if</span> (table.containsKey(key)) &#123;</span><br><span class="line">              table.put(key, table.get(key) + value);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              table.put(key, value);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">       <span class="keyword">for</span> (Integer key : table.keySet()) &#123;</span><br><span class="line">          System.out.println( key + <span class="string">&quot; &quot;</span> + table.get(key));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-题目描述：字符个数统计"><a href="#7-题目描述：字符个数统计" class="headerlink" title="7.题目描述：字符个数统计"></a>7.题目描述：<strong>字符个数统计</strong></h4><p>编写一个函数，计算字符串中含有的不同字符的个数。字符在 ASCII 码范围内( 0~127 ，包括 0 和 127 )，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次</p>
+<p>例如，对于字符串 abaca 而言，有 a、b、c 三种不同的字符，因此输出 3 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.BitSet;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> scanner.next();</span><br><span class="line">        <span class="comment">//总共有128个字符。字需要用128位</span></span><br><span class="line">        <span class="type">BitSet</span> <span class="variable">bitSet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BitSet</span>(<span class="number">128</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : line.toCharArray()) &#123;</span><br><span class="line">                <span class="comment">//未出现就设置为已出现</span></span><br><span class="line">                bitSet.set(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//统计有多少字符已出现过</span></span><br><span class="line">        System.out.println(bitSet.cardinality());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-题目描述：数字颠倒，字符串逆序或反转"><a href="#8-题目描述：数字颠倒，字符串逆序或反转" class="headerlink" title="8.题目描述：数字颠倒，字符串逆序或反转"></a>8.题目描述：数字颠倒，字符串逆序或反转</h4><p>输入一个整数，将这个整数以字符串的形式逆序输出</p>
+<p>程序不考虑负数的情况，若数字含有0，则逆序形式也含有0，如输入为100，则输出为001</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> in.nextLine();</span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">strb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>(str);</span><br><span class="line">        strb.reverse();</span><br><span class="line">        System.out.println(strb.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/imag/background.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -184,16 +250,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/28/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/08/28/%E7%89%9B%E5%AE%A2%E5%88%B7%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/08/27/%E8%AF%B4%E4%B8%80%E4%B8%8B-spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">说一下 spring 的事务隔离</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -208,339 +333,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-说一下-spring-的事务隔离" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/27/%E8%AF%B4%E4%B8%80%E4%B8%8B-spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/">说一下 spring 的事务隔离</a>
-    </h1>
-  
-
-        
-        <a href="/2022/08/27/%E8%AF%B4%E4%B8%80%E4%B8%8B-spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2022-08-27T15:01:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Spring 有五大隔离级别，默认值为 ISOLATION_DEFAULT（使用数据库的设</strong> </p>
-<p><strong>置），其他四个隔离级别和数据库的隔离级别一致：</strong> </p>
-<ol>
-<li>ISOLATION_DEFAULT：用底层数据库的设置隔离级别，数据库设置的</li>
-</ol>
-<p>是什么我就用什么； </p>
-<ol start="2">
-<li>ISOLATION_READ_UNCOMMITTED：<strong>读未提交</strong>，最低隔离级别、事</li></ol>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/27/%E8%AF%B4%E4%B8%80%E4%B8%8B-spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">1.题目描述：进制转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B4%E6%95%B0%E6%B1%82%E6%89%80%E6%9C%89%E8%B4%A8%E5%9B%A0%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">2.题目描述：输入一个正整数求所有质因子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E9%9A%94"><span class="toc-number">3.</span> <span class="toc-text">3.题目描述：字符串分隔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%AD%97%E7%AC%A6%E7%9A%84%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">4.题目描述：字符的出现次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-number">5.</span> <span class="toc-text">5.题目描述：字符串最后一个单词的长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%90%8C%E7%9A%84%E8%AE%B0%E5%BD%95%E8%BF%9B%E8%A1%8C%E5%90%88%E5%B9%B6"><span class="toc-number">6.</span> <span class="toc-text">6.题目描述：索引相同的记录进行合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%AA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">7.题目描述：字符个数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%EF%BC%9A%E6%95%B0%E5%AD%97%E9%A2%A0%E5%80%92%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F%E6%88%96%E5%8F%8D%E8%BD%AC"><span class="toc-number">8.</span> <span class="toc-text">8.题目描述：数字颠倒，字符串逆序或反转</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-Spring框架中用到了哪些设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/26/Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Spring框架中用到了哪些设计模式</a>
-    </h1>
   
 
-        
-        <a href="/2022/08/26/Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2022-08-26T01:56:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Spring框架中用到了哪些设计模式"><a href="#Spring框架中用到了哪些设计模式" class="headerlink" title="Spring框架中用到了哪些设计模式"></a>Spring框架中用到了哪些设计模式</h4><p><strong>工厂设计模式</strong> : 工厂模式是把创建对象的任务交给工厂，从而来降低类与类之间的耦合。Spring 使用工厂模式通过 BeanFactory、ApplicationContext 创建 bean 对象。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/26/Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-对于Spring-IOC和AOP的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/25/%E5%AF%B9%E4%BA%8ESpring-IOC%E5%92%8CAOP%E7%9A%84%E7%90%86%E8%A7%A3/">对于Spring IOC和AOP的理解</a>
-    </h1>
   
 
-        
-        <a href="/2022/08/25/%E5%AF%B9%E4%BA%8ESpring-IOC%E5%92%8CAOP%E7%9A%84%E7%90%86%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2022-08-25T11:12:38.255Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Spring-IOC"><a href="#Spring-IOC" class="headerlink" title="Spring IOC"></a>Spring IOC</h4><p>IOC （inverse of control）控制反转，把<strong>对象的创建、初始化、销毁等工作交给spring容器</strong>来做，由spring容器控制对象的生命周期。</p>
-<p>Spring IOC有三种注入方式：<strong>构造器注入、setter方法注入、根据注解注入。</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/25/%E5%AF%B9%E4%BA%8ESpring-IOC%E5%92%8CAOP%E7%9A%84%E7%90%86%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/25/%E7%BC%93%E5%AD%98/">Spring三级缓存</a>
-    </h1>
   
 
-        
-        <a href="/2022/08/25/%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  	<time datetime="2022-08-25T09:52:32.062Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="先来看看什么是循环依赖？"><a href="#先来看看什么是循环依赖？" class="headerlink" title="先来看看什么是循环依赖？"></a>先来看看什么是循环依赖？</h4><p>从字面上来理解循环依赖其实就是循环引用，也就是两个或则两个以上的bean互相持有对方，最终形成闭环。比如A依赖B的同时B也依赖了A</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/25/%E7%BC%93%E5%AD%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spring Bean的生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">简述SpringBean的生命周期</a>
-    </h1>
-  
-
-        
-        <a href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="archive-article-date">
-  	<time datetime="2022-08-19T14:41:00.432Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>实例化 Instantiation&#x3D;&#x3D;&gt;属性赋值 Populate&#x3D;&#x3D;&gt;初始化 Initialization&#x3D;&#x3D;&gt;销毁 Destruction</strong></p>
-<ol>
-<li>通过加载xml配置文件或注解配置的类，得到BeanDefinition；</li>
-<li>通过BeanDefinition反射创建Bean对象；</li></ol>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/19/Spring%20Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -568,8 +386,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
